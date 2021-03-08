@@ -36,33 +36,11 @@ const BurgerBuilder = (props) => {
     setState({ ...state, purchasing: false });
   };
   const purchaseContinueHandler = () => {
-    // setState({ ...state, loading: true });
-    // const order = {
-    //   price: state.totalPrice,
-    //   ingredients: state.ingredients,
-    //   customer: {
-    //     name: "Haider",
-    //     address: {
-    //       street: "hamayun road",
-    //       country: "Pakistan",
-    //       zipCode: "44000",
-    //     },
-    //     email: "test@test.com",
-    //   },
-    //   paymentMethod: "cash",
-    // };
-    // axios
-    //   .post("/order.json", order)
-    //   .then((response) => {
-    //     setState({ ...state, loading: false, purchasing: false });
-    //   })
-    //   .catch((error) => {
-    //     setState({ ...state, loading: false, purchasing: false });
-    //   });
     const queryParams = [];
     for (let i in state.ingredients) {
       queryParams.push(i + "=" + state.ingredients[i]);
     }
+    queryParams.push("price=" + state.totalPrice);
     const queryString = queryParams.join("&");
     props.history.push({
       pathname: "/checkout",
