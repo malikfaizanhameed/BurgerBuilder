@@ -60,7 +60,7 @@ class ContactData extends Component {
           type="text"
           name="name"
           value={this.state.name}
-          placeholder="enter name"
+          placeholder="Enter name"
           onChange={this.handleChange}
         />
         <label>Contact Number: </label>
@@ -69,7 +69,7 @@ class ContactData extends Component {
           type="text"
           name="number"
           value={this.state.number}
-          placeholder="enter number"
+          placeholder="Enter number"
           onChange={this.handleChange}
         />
         <label>Email: </label>
@@ -86,7 +86,7 @@ class ContactData extends Component {
           type="text"
           name="house"
           value={this.state.house}
-          placeholder="enter house number"
+          placeholder="Enter house number"
           onChange={this.handleChange}
         />
         <label>Street: </label>
@@ -94,7 +94,7 @@ class ContactData extends Component {
           className={classes.Input}
           type="text"
           name="street"
-          placeholder="your street"
+          placeholder="Enter street number"
           onChange={this.handleChange}
         />
         <label>Postal Code: </label>
@@ -102,7 +102,7 @@ class ContactData extends Component {
           className={classes.Input}
           type="text"
           name="postalCode"
-          placeholder="your postal code"
+          placeholder="Enter postal code"
           onChange={this.handleChange}
         />
         <label>
