@@ -5,15 +5,20 @@ import axios from "../../../axios-orders";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 
 class ContactData extends Component {
-  state = {
-    name: "",
-    email: "",
-    address: {
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      number: "",
+      email: "",
+      house: "",
       street: "",
       postalCode: "",
-    },
-    loading: false,
-  };
+      paymentMethod: "",
+      loading: false,
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
   orderHandler = (e) => {
     e.preventDefault();
@@ -21,17 +26,9 @@ class ContactData extends Component {
     const order = {
       price: this.props.price,
       ingredients: this.props.ingredients,
-      customer: {
-        name: "Haider",
-        address: {
-          street: "hamayun road",
-          country: "Pakistan",
-          zipCode: "44000",
-        },
-        email: "test@test.com",
-      },
-      paymentMethod: "cash",
+      customer: this.state,
     };
+    console.log(order);
     axios
       .post("/order.json", order)
       .then((response) => {
@@ -43,33 +40,81 @@ class ContactData extends Component {
       });
   };
 
+  handleChange(event) {
+    const { name, value, type, checked } = event.target;
+    type === "checkbox"
+      ? this.setState({
+          [name]: checked,
+        })
+      : this.setState({
+          [name]: value,
+        });
+  }
+
   render() {
     let form = (
       <form>
+        <label>Name: </label>
         <input
           className={classes.Input}
           type="text"
           name="name"
-          placeholder="your name"
+          value={this.state.name}
+          placeholder="enter name"
+          onChange={this.handleChange}
         />
+        <label>Contact Number: </label>
+        <input
+          className={classes.Input}
+          type="text"
+          name="number"
+          value={this.state.number}
+          placeholder="enter number"
+          onChange={this.handleChange}
+        />
+        <label>Email: </label>
         <input
           className={classes.Input}
           type="email"
           name="email"
-          placeholder="your email"
+          placeholder="example@example.com"
+          onChange={this.handleChange}
         />
+        <label>House #: </label>
+        <input
+          className={classes.Input}
+          type="text"
+          name="house"
+          value={this.state.house}
+          placeholder="enter house number"
+          onChange={this.handleChange}
+        />
+        <label>Street: </label>
         <input
           className={classes.Input}
           type="text"
           name="street"
           placeholder="your street"
+          onChange={this.handleChange}
         />
+        <label>Postal Code: </label>
         <input
           className={classes.Input}
           type="text"
           name="postalCode"
-          placeholder="your p code"
+          placeholder="your postal code"
+          onChange={this.handleChange}
         />
+        <label>
+          <input
+            type="checkbox"
+            name="paymentMethod"
+            onChange={this.handleChange}
+            checked={this.state.paymentMethod}
+          />
+          Payment via Cash?
+        </label>
+        <br />
         <Button btnType="Success" clicked={this.orderHandler}>
           ORDER
         </Button>
